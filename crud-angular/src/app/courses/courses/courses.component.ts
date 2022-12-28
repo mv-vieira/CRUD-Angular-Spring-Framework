@@ -1,5 +1,7 @@
+import { CoursesService } from './../services/courses.service';
 import { Course } from './../model/course';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -8,11 +10,11 @@ import { Component } from '@angular/core';
 })
 export class CoursesComponent {
 
-  courses: Course[] = [
-    {_id: "1", name: 'Angular', category: 'Front-End'},
-    {_id: "2", name: 'Java', category:'Back-End'}
-  ];
+  courses: Observable <Course[]>;
   displayedColumns = ['name' , 'category'];
 
-  constructor() { }
+  // coursesService : CoursesService;
+  constructor(private coursesService : CoursesService ) {
+    this.courses = coursesService.list();
+   }
 }
